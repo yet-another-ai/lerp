@@ -13,7 +13,7 @@ export default function () {
     progress: {
       delay: 50,
       includeCSS: true,
-      showSpinner: false,
+      showSpinner: true,
     },
     setup({ el, App, props, plugin }) {
       const app = createApp({ render: () => h(App, props) });
