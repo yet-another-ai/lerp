@@ -11,4 +11,16 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+
+  # /auth
+  resources :auth, only: [:index] do
+    post "/", to: "auth#create" # mock action to generate route
+    get "/callback", to: "sessions#create"
+  end
+
+  resources :sessions, only: [:index, :create] do
+    delete "/", to: "sessions#destroy", on: :collection
+  end
+
+  resources :users
 end

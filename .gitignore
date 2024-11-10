@@ -40,3 +40,11 @@ node_modules
 # https://vitejs.dev/guide/env-and-mode.html#env-files
 *.local
 
+
+# Ignore automatically generated js-routes files.
+/app/javascript/routes.js
+/app/javascript/routes.d.ts
+
+# Ignore components.d.ts
+/app/javascript/auto-imports.d.ts
+/app/javascript/components.d.ts

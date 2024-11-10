@@ -6,13 +6,18 @@ const eslintrc = new FlatCompat();
 
 export default [
   {
-    ignores: ["node_modules/**/*", "public/**/*"],
+    ignores: ["node_modules/**/*", "public/**/*", "app/javascript/routes.js"],
   },
   prettier,
+  ...eslintrc.extends("@vue/eslint-config-typescript/recommended"),
   ...eslintrc.extends("plugin:vue/vue3-recommended"),
-  ...pluginVue.configs["flat/essential"],
-  ...vueTsEslintConfig(),
   ...eslintrc.extends("plugin:prettier/recommended"),
+  ...eslintrc.extends("plugin:vue-pug/base"),
+
+  // ...eslintrc.extends("plugin:vue/vue3-recommended"),
+  // ...pluginVue.configs["flat/essential"],
+  // ...vueTsEslintConfig(),
+  // ...eslintrc.extends("plugin:prettier/recommended"),
   {
     files: ["app/**/*.ts", "app/**/*.vue"],
     rules: {
