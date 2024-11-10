@@ -40,6 +40,14 @@ gem "thruster", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+# Frontend build tools
+# Inertia replaces your application's view layer. The views returned by your application are JavaScript page components. [https://inertiajs.com]
+gem "inertia_rails", "~> 3.0"
+# Brings Rails named routes to modern javascript [https://github.com/elmassimo/js_from_routes]
+gem "js_from_routes", "~> 4.0", group: :development
+# Vite Ruby is an umbrella project that provides full Vite.js integration in Ruby web apps. [https://vite-ruby.netlify.app/]
+gem 'vite_rails', '~> 3.0'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
