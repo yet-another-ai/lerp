@@ -23,6 +23,10 @@ t-layout
           template(#icon)
             t-icon(name="app")
           | Home
+        t-menu-item(value="/resources", :router="{}")
+          template(#icon)
+            t-icon(name="outbox")
+          | Resources
         template(#operations)
           t-button(variant="text", shape="square", @click="collapsed = !collapsed")
             template(#icon)
@@ -39,7 +43,7 @@ t-layout
 import { router } from '@inertiajs/vue3'
 import { computed, ref, onMounted, watch } from "vue";
 
-import { root_path, auth_index_path, sessions_path } from "@/routes";
+import { root_path, auth_index_path, sessions_path, users_path } from "@/routes";
 import { submitForm } from "@/utils/form";
 
 const props = defineProps<{

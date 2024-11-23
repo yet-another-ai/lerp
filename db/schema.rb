@@ -10,7 +10,67 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_10_121825) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_11_022239) do
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "rents", force: :cascade do |t|
+    t.string "comment", default: "", null: false
+    t.integer "resource_instance_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "started_at", null: false
+    t.datetime "expired_at", null: false
+    t.datetime "returned_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resource_instance_id"], name: "index_rents_on_resource_instance_id"
+    t.index ["user_id"], name: "index_rents_on_user_id"
+  end
+
+  create_table "resource_instances", force: :cascade do |t|
+    t.integer "resource_id", null: false
+    t.string "comment", default: "", null: false
+    t.datetime "deleted_at"
+    t.string "deleted_for", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resource_id", "deleted_at"], name: "index_resource_instances_on_resource_id_and_deleted_at"
+    t.index ["resource_id"], name: "index_resource_instances_on_resource_id"
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.string "type", null: false
+    t.string "name", null: false
+    t.string "description", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.datetime "created_at", null: false
@@ -18,4 +78,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_10_121825) do
     t.datetime "last_login_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
+
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "rents", "resource_instances"
+  add_foreign_key "rents", "users"
+  add_foreign_key "resource_instances", "resources"
 end
