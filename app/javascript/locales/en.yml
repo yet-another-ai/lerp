@@ -1,0 +1,6 @@
+resources:
+  resources: Resources
+  type: Type
+  name: Name
+  isbn: ISBN
+  search: Search

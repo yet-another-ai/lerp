@@ -18,9 +18,17 @@ Rails.application.routes.draw do
     get "/callback", to: "sessions#create"
   end
 
+  # /locale
+  resources :locale, only: [] do
+    patch "/", action: :update, on: :collection
+  end
+
+  # sessions
   resources :sessions, only: [:index, :create] do
     delete "/", to: "sessions#destroy", on: :collection
   end
+
+  resources :resources, only: [:index]
 
   resources :users
 end

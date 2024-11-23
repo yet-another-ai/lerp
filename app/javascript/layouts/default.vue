@@ -6,16 +6,20 @@ t-layout
         i-link.logo(:href="root_path()")
           h2 Lerp
       template(#operations)
-        t-button(variant="text", shape="square")
-          template(#icon)
-            t-icon(name="search")
-        t-button(variant="text", @click="switchRoute(sessions_path())")
-          template(#icon)
-            t-icon(name="user")
-          | {{ current_user?.email }}
-        t-button(variant="text", shape="square", @click="logout")
-          template(#icon)
-            t-icon(name="logout")
+        t-space
+          t-select(:value="props.current_locale", @change="switchLocale")
+            t-option(key="en", label="English", value="en")
+            t-option(key="zh_CN", label="简体中文", value="zh_CN")
+          t-button(variant="text", shape="square")
+            template(#icon)
+              t-icon(name="search")
+          t-button(variant="text", @click="switchRoute(sessions_path())")
+            template(#icon)
+              t-icon(name="user")
+            | {{ current_user?.email }}
+          t-button(variant="text", shape="square", @click="logout")
+            template(#icon)
+              t-icon(name="logout")
   t-layout
     t-aside.sidebar
       t-menu(v-model="pathname", @change="switchRoute", :collapsed="collapsed")
@@ -42,8 +46,9 @@ t-layout
 <script lang="ts" setup>
 import { router } from '@inertiajs/vue3'
 import { computed, ref, onMounted, watch } from "vue";
+import { useI18n } from "vue-i18n";
 
-import { root_path, auth_index_path, sessions_path, users_path } from "@/routes";
+import { root_path, auth_index_path, locale_index_path, sessions_path, users_path } from "@/routes";
 import { submitForm } from "@/utils/form";
 
 const props = defineProps<{
@@ -51,21 +56,38 @@ const props = defineProps<{
     id: number;
     email: string;
   };
+  current_locale: string;
 }>();
+
+const { t, locale } = useI18n();
 
 const collapsed = ref(true);
 const pathname = ref(window.location.pathname);
-
 router.on('navigate', (event) => pathname.value = event.detail.page.url);
 
 const switchRoute = (value: string) => router.visit(value);
 
 const logout = () => submitForm('delete', sessions_path(), {});
 
+const switchLocale = (value: string) => {
+  submitForm("patch", locale_index_path(), {
+    locale: value,
+  });
+};
+
 onMounted(() => {
   if (!props.current_user)
     router.visit(auth_index_path());
+
+  locale.value = props.current_locale;
 });
+
+watch(
+  () => props.current_locale,
+  (value) => {
+    locale.value = value;
+  },
+);
 </script>
 
 <style lang="stylus" scoped>
@@ -75,6 +97,7 @@ onMounted(() => {
 
 .content
   min-height calc(100vh - 126px)
+  padding 20px
 
 .sidebar
   width auto

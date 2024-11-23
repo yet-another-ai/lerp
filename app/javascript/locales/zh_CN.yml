@@ -1,0 +1,6 @@
+resources:
+  resources: 资源
+  type: 类型
+  name: 名称
+  isbn: ISBN
+  search: 搜索
