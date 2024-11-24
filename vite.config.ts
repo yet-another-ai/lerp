@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import RubyPlugin from "vite-plugin-ruby";
 import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
 import vueDevTools from "vite-plugin-vue-devtools";
 import vueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import FullReload from "vite-plugin-full-reload";
@@ -15,6 +16,7 @@ export default defineConfig({
     FullReload(["config/routes.rb", "app/views/**/*"], { delay: 200 }),
     RubyPlugin(),
     vue(),
+    vueJsx(),
     vueDevTools(),
     vueI18nPlugin({
       include: [path.resolve(__dirname, "./app/javascript/locales/**")],

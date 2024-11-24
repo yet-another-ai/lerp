@@ -15,7 +15,7 @@
   t-table.table(:data="books", row-key="id", :columns="columns", stripe)
 </template>
 
-<script lang="ts" setup>
+<script lang="tsx" setup>
 import { router } from '@inertiajs/vue3'
 import { ref, reactive } from "vue";
 import { useI18n } from "vue-i18n";
@@ -39,6 +39,10 @@ const form = reactive<BookSearch>({
 const columns = ref<TableProps["columns"]>([
   { title: t("resources.name"), colKey: "name" },
   { title: t("resources.isbn"), colKey: "isbn" },
+  { title: t("resources.description"), colKey: "description" },
+  { cell: (h, { row }) => {
+    return (<t-button>Inspect</t-button>);
+  }},
 ]);
 
 const submit = () => {
