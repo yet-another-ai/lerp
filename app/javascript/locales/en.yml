@@ -1,6 +1,12 @@
+home: Home
+logout: Logout
 resources:
   resources: Resources
-  type: Type
   name: Name
+  description: Description
   isbn: ISBN
   search: Search
+  reset: Reset
+  create: Create
+  types:
+    book: Book

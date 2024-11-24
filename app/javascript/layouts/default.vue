@@ -26,11 +26,14 @@ t-layout
         t-menu-item(:value="root_path()", :router="{}")
           template(#icon)
             t-icon(name="app")
-          | Home
-        t-menu-item(value="/resources", :router="{}")
+          | {{ t("home") }}
+        t-submenu(:title="t('resources.resources')")
           template(#icon)
             t-icon(name="outbox")
-          | Resources
+          t-menu-item(:value="books_path()", :router="{}")
+            template(#icon)
+              t-icon(name="book")
+            | {{ t("resources.types.book") }}
         template(#operations)
           t-button(variant="text", shape="square", @click="collapsed = !collapsed")
             template(#icon)
@@ -48,7 +51,7 @@ import { router } from '@inertiajs/vue3'
 import { computed, ref, onMounted, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
-import { root_path, auth_index_path, locale_index_path, sessions_path, users_path } from "@/routes";
+import { root_path, auth_index_path, books_path, locale_index_path, sessions_path, users_path } from "@/routes";
 import { submitForm } from "@/utils/form";
 
 const props = defineProps<{

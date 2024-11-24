@@ -23,12 +23,13 @@ Rails.application.routes.draw do
     patch "/", action: :update, on: :collection
   end
 
-  # sessions
+  # /sessions
   resources :sessions, only: [:index, :create] do
     delete "/", to: "sessions#destroy", on: :collection
   end
 
-  resources :resources, only: [:index]
+  # /books
+  resources :books, only: [:index, :create, :new]
 
   resources :users
 end

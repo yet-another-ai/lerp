@@ -1,3 +1,4 @@
+import type { RequestPayload } from "@inertiajs/core";
 import { router } from "@inertiajs/vue3";
 
 export function authenticityToken() {
@@ -6,7 +7,11 @@ export function authenticityToken() {
 };
 
 
-export function submitForm(method: 'get' | 'post' | 'put' | 'patch' | 'delete', path: string, data: Record<string, string>) {
+export function submitForm(
+  method: "get" | "post" | "put" | "patch" | "delete",
+  path: string,
+  data: RequestPayload,
+) {
   router.visit(path, {
     method,
     data: {
@@ -14,5 +19,4 @@ export function submitForm(method: 'get' | 'post' | 'put' | 'patch' | 'delete', 
       authenticity_token: authenticityToken(),
     },
   });
-};
-
+}

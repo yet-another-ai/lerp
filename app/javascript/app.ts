@@ -23,7 +23,7 @@ export default function () {
         locale: "en",
         messages,
       });
-      
+
       app.use(plugin);
       app.use(createPinia());
       app.use(i18n);

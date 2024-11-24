@@ -67,6 +67,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_11_022239) do
     t.string "type", null: false
     t.string "name", null: false
     t.string "description", default: "", null: false
+    t.string "isbn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
