@@ -53,7 +53,7 @@ gem "inertia_rails", "~> 3.0"
 # Vite Ruby is an umbrella project that provides full Vite.js integration in Ruby web apps. [https://vite-ruby.netlify.app/]
 gem "vite_rails", "~> 3.0"
 # Generate JavaScript routes from Rails routes [https://github.com/railsware/js-routes]
-gem "js-routes", "~> 2.2"
+gem "js-routes", "~> 2.3"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
