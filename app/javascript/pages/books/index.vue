@@ -12,18 +12,17 @@
       t-space
         t-button(theme="primary", @click="submit") {{ t("resources.search") }}
         t-button(theme="warning", @click="reset") {{ t("resources.reset") }}
-  t-table.table(:data="books", row-key="id", :columns="columns", stripe)
+  t-table.table(:data="props.books", row-key="id", :columns="columns", stripe)
 </template>
 
 <script lang="tsx" setup>
-import { router } from '@inertiajs/vue3'
-import { ref, reactive } from "vue";
+import { router, useForm } from "@inertiajs/vue3";
+import { reactive, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import type { TableProps } from 'tdesign-vue-next';
+import type { TableProps } from "tdesign-vue-next";
 
-import { submitForm } from "@/utils/form";
 import type { Book, BookSearch } from "@/types";
-import { books_path,new_book_path } from "@/routes";
+import { books_path, new_book_path } from "@/routes";
 
 const { t } = useI18n();
 
@@ -40,13 +39,15 @@ const columns = ref<TableProps["columns"]>([
   { title: t("resources.name"), colKey: "name" },
   { title: t("resources.isbn"), colKey: "isbn" },
   { title: t("resources.description"), colKey: "description" },
-  { cell: (h, { row }) => {
-    return (<t-button>Inspect</t-button>);
-  }},
+  {
+    cell: (_) => {
+      return <t-button>Inspect</t-button>;
+    },
+  },
 ]);
 
 const submit = () => {
-  submitForm("get", books_path(), { search_params: form });
+  useForm({ search_params: form }).get(books_path());
 };
 
 const reset = () => {

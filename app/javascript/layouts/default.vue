@@ -22,7 +22,7 @@ t-layout
               t-icon(name="logout")
   t-layout
     t-aside.sidebar
-      t-menu(v-model="pathname", @change="switchRoute", :collapsed="collapsed")
+      t-menu(v-model="pathname", :collapsed="collapsed", @change="switchRoute")
         t-menu-item(:value="root_path()", :router="{}")
           template(#icon)
             t-icon(name="app")
@@ -47,12 +47,18 @@ t-layout
 </template>
 
 <script lang="ts" setup>
-import { router } from '@inertiajs/vue3'
-import { computed, ref, onMounted, watch } from "vue";
+import { router } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
+import { onMounted, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
-import { root_path, auth_index_path, books_path, locale_index_path, sessions_path, users_path } from "@/routes";
-import { submitForm } from "@/utils/form";
+import {
+  auth_index_path,
+  books_path,
+  locale_index_path,
+  root_path,
+  sessions_path,
+} from "@/routes";
 
 const props = defineProps<{
   current_user: {
@@ -66,21 +72,18 @@ const { t, locale } = useI18n();
 
 const collapsed = ref(true);
 const pathname = ref(window.location.pathname);
-router.on('navigate', (event) => pathname.value = event.detail.page.url);
+router.on("navigate", (event) => (pathname.value = event.detail.page.url));
 
 const switchRoute = (value: string) => router.visit(value);
 
-const logout = () => submitForm('delete', sessions_path(), {});
+const logout = () => useForm({}).delete(sessions_path());
 
-const switchLocale = (value: string) => {
-  submitForm("patch", locale_index_path(), {
-    locale: value,
-  });
+const switchLocale = (locale: string) => {
+  useForm({ locale }).patch(locale_index_path());
 };
 
 onMounted(() => {
-  if (!props.current_user)
-    router.visit(auth_index_path());
+  if (!props.current_user) router.visit(auth_index_path());
 
   locale.value = props.current_locale;
 });

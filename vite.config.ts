@@ -9,7 +9,7 @@ import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import path from "path";
 
-import { TDesignResolver } from "unplugin-vue-components/resolvers"
+import { TDesignResolver } from "unplugin-vue-components/resolvers";
 
 export default defineConfig({
   plugins: [
@@ -24,15 +24,15 @@ export default defineConfig({
     AutoImport({
       resolvers: [
         TDesignResolver({
-          library: 'vue-next'
-        })
-      ]
+          library: "vue-next",
+        }),
+      ],
     }),
     Components({
       resolvers: [
         TDesignResolver({
-          library: 'vue-next'
-        })
+          library: "vue-next",
+        }),
       ],
     }),
   ],

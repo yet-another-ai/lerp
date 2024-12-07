@@ -1,6 +1,9 @@
 import layout from "./layouts/default.vue";
 
-const pages: Record<string, any> = import.meta.glob("./pages/**/*.vue", { eager: true });
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const pages: Record<string, any> = import.meta.glob("./pages/**/*.vue", {
+  eager: true,
+});
 
 export async function resolvePage(name: string) {
   const page = pages[`./pages/${name}.vue`];

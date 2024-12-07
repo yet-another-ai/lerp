@@ -14,8 +14,8 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useForm } from "@inertiajs/vue3";
 
-import { submitForm } from "@/utils/form";
 import { books_path } from "@/routes";
 
 const { t } = useI18n();
@@ -27,6 +27,6 @@ const form = ref({
 });
 
 const create = () => {
-  submitForm("post", books_path(), { book: form.value });
+  useForm({ book: form.value }).post(books_path());
 };
 </script>
