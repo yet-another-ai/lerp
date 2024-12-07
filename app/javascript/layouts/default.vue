@@ -47,8 +47,7 @@ t-layout
 </template>
 
 <script lang="ts" setup>
-import { router } from "@inertiajs/vue3";
-import { useForm } from "@inertiajs/vue3";
+import { router, useForm } from "@inertiajs/vue3";
 import { onMounted, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
