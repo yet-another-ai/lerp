@@ -16,7 +16,7 @@ t-layout
           t-button(variant="text", @click="switchRoute(sessions_path())")
             template(#icon)
               t-icon(name="user")
-            | {{ current_user?.email }}
+            | {{ props.current_user?.email }}
           t-button(variant="text", shape="square", @click="logout")
             template(#icon)
               t-icon(name="logout")
@@ -59,6 +59,7 @@ import {
   sessions_path,
 } from "@/routes";
 
+/* eslint-disable vue/prop-name-casing */
 const props = defineProps<{
   current_user: {
     id: number;
@@ -66,6 +67,7 @@ const props = defineProps<{
   };
   current_locale: string;
 }>();
+/* eslint-enable vue/prop-name-casing */
 
 const { t, locale } = useI18n();
 
