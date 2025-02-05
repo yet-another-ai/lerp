@@ -49,7 +49,7 @@ gem "omniauth_openid_connect"
 
 # Frontend build tools
 # Inertia replaces your application's view layer. The views returned by your application are JavaScript page components. [https://inertiajs.com]
-gem "inertia_rails", "~> 3.0"
+gem "inertia_rails", "~> 3.6"
 # Vite Ruby is an umbrella project that provides full Vite.js integration in Ruby web apps. [https://vite-ruby.netlify.app/]
 gem "vite_rails", "~> 3.0"
 # Generate JavaScript routes from Rails routes [https://github.com/railsware/js-routes]
